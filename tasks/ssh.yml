@@ -3,7 +3,7 @@
   apt:
     name: openssh-server
     state: latest
-  when: not bootstrap
+  when: not ssh_bootstrap
   notify:
     - Restarts sshd
 
@@ -15,7 +15,7 @@
     group: root
     mode: 0644
     backup: yes
-  when: not bootstrap
+  when: not ssh_bootstrap
   notify:
     - Restarts sshd
 
