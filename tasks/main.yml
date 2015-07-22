@@ -1,0 +1,4 @@
+- include: ssh_bootstrap.yml tags=ssh
+  when: ssh_bootstrap
+
+- include: ssh.yml tags=ssh

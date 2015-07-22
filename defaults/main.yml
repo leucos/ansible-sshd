@@ -1,0 +1,19 @@
+# Local users that can be ssh'ed as
+ssh_allow_users:
+  - root
+
+# Are we bootstrapping on alternate user ?
+ssh_bootstrap: false
+
+# SSH port
+ssh_port: 22
+
+# Whether we want x11 forwarding or not in ssh config
+ssh_x11_forwarding: "no"
+
+# Remote users keys that will be added
+# Example:
+# ssh_remote_users:
+# - { name: foo, key: "ssh-dss A...", users: [ "localuser1", "localuser2" ]}
+ssh_remote_users: []
+

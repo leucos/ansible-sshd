@@ -1,0 +1,28 @@
+
+- name: Install openssh-server
+  apt:
+    name: openssh-server
+    state: latest
+  when: not bootstrap
+  notify:
+    - Restarts sshd
+
+- name: Deploys sshd config
+  template:
+    src: "../templates/sshd_config.j2"
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  when: not bootstrap
+  notify:
+    - Restarts sshd
+
+- name: Deploys authorized ssh keys for users
+  authorized_key:
+    user: "{{item.user | default('root')}}"
+    key: "{{item.key}}"
+    state: present
+  with_items: ssh_keys
+
