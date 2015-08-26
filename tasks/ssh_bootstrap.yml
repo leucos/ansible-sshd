@@ -13,4 +13,4 @@
   template: src="../templates/authorized_keys2.j2" dest=~{{ item }}/.ssh/authorized_keys2 owner={{ item }} group={{ item }} mode=0600 backup=yes
   with_items: ssh_allow_users
   when: ssh_bootstrap and ssh_bootstrap_user is defined
-
+  tags: ssh:keys
