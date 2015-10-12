@@ -59,7 +59,7 @@ PermitEmptyPasswords no
 ChallengeResponseAuthentication no
 
 # Change to no to disable tunnelled clear text passwords
-PasswordAuthentication no
+PasswordAuthentication {{ ssh_password_authentication }}
 
 # Kerberos options
 KerberosAuthentication no
@@ -89,7 +89,7 @@ TCPKeepAlive yes
 # Allow client to pass locale environment variables
 AcceptEnv LANG LC_*
 
-Subsystem sftp /usr/lib/openssh/sftp-server
+Subsystem {{ ssh_sftp_subsystem }}
 
 # Set this to 'yes' to enable PAM authentication, account processing,
 # and session processing. If this is enabled, PAM authentication will
@@ -101,5 +101,17 @@ Subsystem sftp /usr/lib/openssh/sftp-server
 # PAM authentication, then enable this but set PasswordAuthentication
 # and ChallengeResponseAuthentication to 'no'.
 UsePAM yes
-AllowUsers {% if 'vagrant' in group_names -%} vagrant {% endif -%} {% for adm in ssh_allow_users -%} {{ adm }} {% endfor -%}
+AllowUsers {% if 'vagrant' in group_names -%} vagrant {% endif -%} {{ ssh_allow_users | join(' ') }}
+
+{% if ssh_match_users is defined %}
+{%   for user in ssh_match_users %}
+Match User {{ user.name }}
+  ForceCommand {{ user.force_command }}
+
+{%   endfor %}
+{% endif %}
+
+
+
+
 

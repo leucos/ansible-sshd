@@ -5,6 +5,12 @@ ssh_allow_users:
 # Are we bootstrapping on alternate user ?
 ssh_bootstrap: false
 
+# Sftp subsystem
+ssh_sftp_subsystem: "sftp /usr/lib/openssh/sftp-server"
+
+# Authenticate via password ?
+ssh_password_authentication: "no"
+
 # SSH port
 ssh_port: 22
 
