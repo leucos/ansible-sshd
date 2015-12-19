@@ -1,0 +1,7 @@
+{% import 'variables.inc' as var with context %}
+
+# Allow access to clients
+protocol tcp dport {{ ssh_port }} {
+  @def $ITEMS = ( @ipfilter( ( {{ var.ssh_allow_scopes | unique | join(" ") }} ) ) );
+  saddr $ITEMS ACCEPT;
+}

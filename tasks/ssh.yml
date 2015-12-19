@@ -25,3 +25,11 @@
     state: present
   with_items: ssh_keys
   tags: ssh:keys
+
+- name: Adds ferm filtering
+  template:
+    src: "../templates/ferm.j2"
+    dest: /etc/ferm/filter-input.d/60_ssh.conf
+  when: ferm_enabled
+  tags: ferm
+  notify: Restart ferm
