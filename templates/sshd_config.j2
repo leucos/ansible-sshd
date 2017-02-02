@@ -111,7 +111,16 @@ Match User {{ user.name }}
 {%   endfor %}
 {% endif %}
 
-
+{% if ssh_sftp_chroot is defined %}
+ Match Group {{ ssh_sftp_chroot.group }}
+   ChrootDirectory %h
+   ForceCommand internal-sftp
+   AuthorizedKeysFile      /etc/ssh/authorized_keys/%u
+   PasswordAuthentication {{ ssh_sftp_chroot.password_authentication | default(false) }}
+   AllowTcpForwarding no
+   PermitTunnel no
+   X11Forwarding no
+{% endif %}
 
 
 
