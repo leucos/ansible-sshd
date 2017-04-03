@@ -1,4 +1,6 @@
-- include: ssh_bootstrap.yml tags=ssh
+- include: ssh_bootstrap.yml
+  tags: ["ssh"]
   when: ssh_bootstrap
 
-- include: ssh.yml tags=ssh
+- include: ssh.yml
+  tags: ["ssh"]
