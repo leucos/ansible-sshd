@@ -22,7 +22,7 @@
   authorized_key:
     user: "{{item.user | default('root')}}"
     key: "{{item.key}}"
-    path: ssh_authorized_keys_path | default("{{ ansible_env.HOME }}/.ssh/authorized_keys")
+    path: "{{ ssh_authorized_keys_path }}"
     state: present
   with_items: "[ {{ ssh_keys }} ]"
   tags: ["ssh:keys"]

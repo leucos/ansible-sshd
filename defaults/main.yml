@@ -2,6 +2,8 @@
 ssh_allow_users:
   - root
 
+ssh_authorized_keys_path: "{{ ansible_env.HOME }}/.ssh/authorized_keys"
+
 # Are we bootstrapping on alternate user ?
 ssh_bootstrap: false
 
