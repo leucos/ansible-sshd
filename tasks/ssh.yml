@@ -20,14 +20,13 @@
 
 - name: Deploys authorized ssh keys for users
   authorized_key:
-    user: "{{item.0.user | default('root')}}"
-    key: "{{item.0.key}}"
+    user: "{{ item.0.user | default('root')}}"
+    key: "{{ item.0.key}}"
     path: "{{ ansible_env.HOME + '/' + item.1 }}"
     state: present
-  with_items: 
+  with_nested:
     - "{{ ssh_keys }}"
     - "{{ ssh_keys_files }}"
-
   tags: ["ssh:keys"]
 
 - name: Adds ferm filtering
