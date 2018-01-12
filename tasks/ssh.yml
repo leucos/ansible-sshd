@@ -35,3 +35,8 @@
   when: ferm_enabled
   tags: ["ferm"]
   notify: Restart ferm
+
+- name: Creates sftp group if needed
+  group:
+    name: "{{ ssh_sftp_chroot.group }}"
+  when: ssh_sftp_chroot is defined and 'group' in ssh_sftp_chroot
