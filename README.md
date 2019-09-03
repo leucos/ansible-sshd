@@ -1,4 +1,4 @@
-**MOVED TO https://github.com/leucos/ansible-sshd**
+**MOVED TO https://github.com/devops-works/ansible-sshd**
 
 Ansible sshd role
 =================
